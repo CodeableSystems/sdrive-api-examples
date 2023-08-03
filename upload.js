@@ -14,6 +14,9 @@ async function uploadFile(fileStream, filename) {
   });
   formData.append("username", username);
   formData.append("apikey", apikey);
+  //optional, set this to "true" if you want the files to be uploaded to your personal account instead of an immutable storage account
+  //formData.append("use_personal", "true");
+
   return await axios
     .post("https://sdrive.app/api/v3/upload", formData, {
       headers: formData.getHeaders(), // Set headers from formData
