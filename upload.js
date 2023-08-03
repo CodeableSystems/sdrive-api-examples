@@ -14,7 +14,7 @@ async function uploadFile(fileStream, filename) {
   });
   formData.append("username", username);
   formData.append("apikey", apikey);
-
+  console.log("sending", username, apikey);
   return await axios
     .post("https://sdrive.app/api/v3/upload", formData, {
       headers: formData.getHeaders(), // Set headers from formData
@@ -34,20 +34,12 @@ async function uploadFile(fileStream, filename) {
 
 // Example usage
 (async () => {
-  const fileStream = fs.createReadStream("hello.png");
+  const inputPath = "hello.png";
+  const filename = inputPath.split("/").pop();
+  const fileStream = fs.createReadStream(inputPath);
   try {
-    const response = await uploadFile(fileStream, "hello.txt");
+    const response = await uploadFile(fileStream, inputPath);
     console.log(response);
-    if (response.file) {
-      // optional - this is done automatically in the backend
-      console.log("...file uploaded, caching for global CDN");
-      setTimeout(async () => {
-        await axios.put(response.file).catch((e) => {
-          //too early
-          console.error(e.message);
-        });
-      }, 5000);
-    }
   } catch (error) {
     console.error(error);
   }
