@@ -14,7 +14,6 @@ async function uploadFile(fileStream, filename) {
   });
   formData.append("username", username);
   formData.append("apikey", apikey);
-  console.log("sending", username, apikey);
   return await axios
     .post("https://sdrive.app/api/v3/upload", formData, {
       headers: formData.getHeaders(), // Set headers from formData
