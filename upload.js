@@ -3,7 +3,7 @@ import FormData from "form-data";
 import fs from "fs";
 import dotenv from "dotenv";
 import mime from "mime-types";
-import path from "path"
+import path from "path";
 dotenv.config();
 async function uploadFile(fileStream, filename) {
   let formData = new FormData();
@@ -38,7 +38,6 @@ async function uploadFile(fileStream, filename) {
 
 // Example usage
 (async () => {
-
   const inputPath = process.argv[2];
   const filename = inputPath.split("/").pop();
   const fileStream = fs.createReadStream(inputPath);
