@@ -2,15 +2,17 @@ import axios from "axios";
 import FormData from "form-data";
 import fs from "fs";
 import dotenv from "dotenv";
+import mime from "mime-types";
+import path from "path"
 dotenv.config();
 async function uploadFile(fileStream, filename) {
   let formData = new FormData();
   let username = process.env.username;
   let apikey = process.env.apikey;
-
+  let mimetype = mime.lookup(path.extname(filename));
   formData.append("fileupload", fileStream, {
     filename: filename,
-    contentType: "image/png",
+    contentType: mimetype,
   });
   formData.append("username", username);
   formData.append("apikey", apikey);
@@ -36,7 +38,8 @@ async function uploadFile(fileStream, filename) {
 
 // Example usage
 (async () => {
-  const inputPath = "hello.png";
+
+  const inputPath = process.argv[2];
   const filename = inputPath.split("/").pop();
   const fileStream = fs.createReadStream(inputPath);
   try {
