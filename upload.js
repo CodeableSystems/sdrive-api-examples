@@ -9,6 +9,7 @@ async function uploadFile(fileStream, filename) {
   let formData = new FormData();
   let username = process.env.username;
   let apikey = process.env.apikey;
+  let base_url = process.env.base_url || "https://sdrive.app/api/v3";
   let mimetype = mime.lookup(path.extname(filename));
   formData.append("fileupload", fileStream, {
     filename: filename,
@@ -20,7 +21,7 @@ async function uploadFile(fileStream, filename) {
   //formData.append("use_personal", "true");
 
   return await axios
-    .post("https://sdrive.app/api/v3/upload", formData, {
+    .post(base_url + "/upload", formData, {
       headers: formData.getHeaders(), // Set headers from formData
     })
     .catch((error) => {
