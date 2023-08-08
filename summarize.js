@@ -6,6 +6,10 @@ dotenv.config();
 async function summarize(text, length) {
   let username = process.env.username;
   let apikey = process.env.apikey;
+  if (!username && !apikey) {
+    console.log("Please add your credentials to the .env file");
+    process.exit();
+  }
 
   let base_url = process.env.base_url || "https://sdrive.app/api/v3";
   return await axios

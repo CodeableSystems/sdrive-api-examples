@@ -8,6 +8,10 @@ async function search(query, page) {
   let username = process.env.username;
   let apikey = process.env.apikey;
   let base_url = process.env.base_url || "https://sdrive.app/api/v3";
+  if (!username && !apikey) {
+    console.log("Please add your credentials to the .env file");
+    process.exit();
+  }
 
   return await axios
     .post(base_url + "/search/files", {
