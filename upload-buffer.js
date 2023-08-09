@@ -10,6 +10,11 @@ async function uploadFile(fileStream, filename) {
   let username = process.env.username;
   let apikey = process.env.apikey;
   let base_url = process.env.base_url || "https://sdrive.app/api/v3";
+  if (!username && !apikey) {
+    console.log("Please add your credentials to the .env file");
+    process.exit();
+  }
+
   let mimetype = mime.lookup(path.extname(filename));
   formData.append("fileupload", fileStream, {
     filename: filename,
@@ -17,8 +22,6 @@ async function uploadFile(fileStream, filename) {
   });
   formData.append("username", username);
   formData.append("apikey", apikey);
-  //optional, set this to "true" if you want the files to be uploaded to your personal account instead of an immutable storage account
-  //formData.append("use_personal", "true");
 
   return await axios
     .post(base_url + "/upload", formData, {
