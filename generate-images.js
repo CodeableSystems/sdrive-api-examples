@@ -16,6 +16,13 @@ async function generateImage(prompt) {
     .post(base_url + "/ai/image/generate", {
       apikey,
       prompt,
+      restoreFaces: false,
+      seed: 1410159294,
+      subseed: 1128386118,
+      cfgScale: 7,
+
+      steps: 50,
+      negativePrompt: "hands,fingers",
     })
     .catch((error) => {
       const errorInfo = {
@@ -33,7 +40,9 @@ async function generateImage(prompt) {
 // Example usage
 (async () => {
   try {
-    const response = await generateImage("dog with cowboy hat");
+    const response = await generateImage(
+      "jazz cats playing poker, cartoon, paws"
+    );
     console.log(response);
   } catch (error) {
     console.error(error);

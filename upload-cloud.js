@@ -40,10 +40,10 @@ async function uploadFile(fileStream, filename) {
 
 // Example usage
 (async () => {
- if(!process.argv[2]){
-  console.log("supply filename to upload");
-	return;
- }
+  if (!process.argv[2]) {
+    console.log("supply filename to upload");
+    return;
+  }
   const inputPath = process.argv[2];
   const filename = inputPath.split("/").pop();
   const fileStream = fs.createReadStream(inputPath);
