@@ -7,10 +7,9 @@ import path from "path";
 dotenv.config();
 async function uploadFile(fileStream, filename) {
   let formData = new FormData();
-  let username = process.env.username;
   let apikey = process.env.apikey;
   let base_url = process.env.base_url || "https://sdrive.app/api/v3";
-  if (!username && !apikey) {
+  if (!apikey) {
     console.log("Please add your credentials to the .env file");
     process.exit();
   }
@@ -20,7 +19,6 @@ async function uploadFile(fileStream, filename) {
     filename: filename,
     contentType: mimetype,
   });
-  formData.append("username", username);
   formData.append("apikey", apikey);
 
   return await axios
@@ -42,6 +40,10 @@ async function uploadFile(fileStream, filename) {
 
 // Example usage
 (async () => {
+ if(!process.argv[2]){
+  console.log("supply filename to upload");
+	return;
+ }
   const inputPath = process.argv[2];
   const filename = inputPath.split("/").pop();
   const fileStream = fs.createReadStream(inputPath);
