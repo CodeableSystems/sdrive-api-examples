@@ -3,7 +3,7 @@ import FormData from "form-data";
 import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
-async function generateImage(query, seed, size) {
+async function generateImage(prompt) {
   let formData = new FormData();
   let apikey = process.env.apikey;
   let base_url = process.env.base_url || "https://sdrive.app/api/v3";
@@ -15,9 +15,7 @@ async function generateImage(query, seed, size) {
   return await axios
     .post(base_url + "/ai/image/generate", {
       apikey,
-      query,
-      seed,
-	size
+      prompt,
     })
     .catch((error) => {
       const errorInfo = {
