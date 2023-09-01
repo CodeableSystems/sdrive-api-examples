@@ -6,6 +6,10 @@ import mime from "mime-types";
 import path from "path";
 dotenv.config();
 async function uploadVideo(fileStream, filename, callback_url) {
+  if (!callback_url) {
+    console.log("Please provide callback url");
+    return;
+  }
   let formData = new FormData();
   let apikey = process.env.apikey;
   let base_url = process.env.base_url || "https://sdrive.app/api/v3";
