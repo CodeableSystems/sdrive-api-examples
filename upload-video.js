@@ -54,11 +54,8 @@ async function uploadVideo(fileStream, filename, callback_url) {
   /*
 	{	 
 	  "base": "https://shdw-drive.genesysgo.net/GYSM8Nk9kw7rYz5NbRht8Mh9K3KKRKJ86sThxVzyF4n1",
-	  "playlist": [
-	    "ayglugc8y4getrk39k2dl1cu.m3u8",
-	    "ayglugc8y4getrk39k2dl1cu_0.m3u8"
-	  ],
-	  "metadata": {
+	  "playlist": "ayglugc8y4getrk39k2dl1cu.m3u8",
+	  "files": {
 	    "screenshots": [
 	      "ayglugc8y4getrk39k2dl1cu_01.jpg",
 	      "ayglugc8y4getrk39k2dl1cu_02.jpg",
