@@ -38,7 +38,7 @@ async function uploadVideo(fileStream, filename, callback_url) {
 (async () => {
   const inputPath = process.argv[2];
   const filename = inputPath.split("/").pop();
-  const callback_url = "https://jobs.sdrive.app/callback";
+  const callback_url = "";
   const fileStream = fs.createReadStream(inputPath);
   try {
     const response = await uploadVideo(fileStream, inputPath, callback_url);
@@ -46,4 +46,22 @@ async function uploadVideo(fileStream, filename, callback_url) {
   } catch (error) {
     console.error(error);
   }
+  //Sample result:
+  /*
+	{	 
+	  "base": "https://shdw-drive.genesysgo.net/GYSM8Nk9kw7rYz5NbRht8Mh9K3KKRKJ86sThxVzyF4n1",
+	  "playlist": [
+	    "ayglugc8y4getrk39k2dl1cu.m3u8",
+	    "ayglugc8y4getrk39k2dl1cu_0.m3u8"
+	  ],
+	  "metadata": {
+	    "screenshots": [
+	      "ayglugc8y4getrk39k2dl1cu_01.jpg",
+	      "ayglugc8y4getrk39k2dl1cu_02.jpg",
+	      "ayglugc8y4getrk39k2dl1cu_03.jpg"
+	    ],
+	    "gif": "ayglugc8y4getrk39k2dl1cu_anim.gif"
+	  }
+	}
+   */
 })();
