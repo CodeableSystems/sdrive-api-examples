@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 import mime from "mime-types";
 import path from "path";
 dotenv.config();
-async function uploadVideo(fileStream, filename, callback_url) {
+async function uploadVideo(
+  fileStream,
+  filename,
+  callback_url,
+  callback_method
+) {
   if (!callback_url) {
     console.log("Please provide callback url");
     return;
@@ -20,6 +25,7 @@ async function uploadVideo(fileStream, filename, callback_url) {
   });
   formData.append("callback_url", callback_url);
   formData.append("apikey", apikey);
+  formData.append("callback_method", callback_method);
 
   return await axios
     .post(base_url + "/upload/video", formData, {
@@ -42,10 +48,15 @@ async function uploadVideo(fileStream, filename, callback_url) {
 (async () => {
   const inputPath = process.argv[2];
   const filename = inputPath.split("/").pop();
-  const callback_url = "";
+  const callback_url = "https://jobs.sdrive.app/callback";
   const fileStream = fs.createReadStream(inputPath);
   try {
-    const response = await uploadVideo(fileStream, inputPath, callback_url);
+    const response = await uploadVideo(
+      fileStream,
+      inputPath,
+      callback_url,
+      "POST"
+    );
     console.log(response);
   } catch (error) {
     console.error(error);
