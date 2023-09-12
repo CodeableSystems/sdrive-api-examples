@@ -1,19 +1,10 @@
 import axios from "axios";
-import FormData from "form-data";
 import fs from "fs";
 import dotenv from "dotenv";
 import mime from "mime-types";
 import path from "path";
 dotenv.config();
-async function convertAudio(media_url, callback_url, callback_method) {
-  if (!callback_url) {
-    console.log("Please provide callback url");
-    return;
-  }
-  if (!callback_method) {
-    console.log("Please provide callback method");
-    return;
-  }
+async function convertMediaURL(media_url) {
   if (!media_url) {
     console.log("Please provide url to convert");
     return;
@@ -23,10 +14,8 @@ async function convertAudio(media_url, callback_url, callback_method) {
   let base_url = process.env.base_url || "https://v3.sdrive.app";
 
   return await axios
-    .post(base_url + "/audio/convert", {
+    .post(base_url + "/media/convert", {
       apikey,
-      callback_url,
-      callback_method,
       media_url,
     })
     .catch((error) => {
@@ -45,13 +34,9 @@ async function convertAudio(media_url, callback_url, callback_method) {
 // Example usage
 (async () => {
   const media_url = process.argv[2];
-  const callback_url = "https://jobs.sdrive.app/callback"; // switch out with your own callback URL
-  const callback_method = "POST"; // GET or POST
   try {
-    const response = await convertAudio(
+    const response = await convertMediaURL(
       media_url,
-      callback_url,
-      callback_method
     );
     console.log(response);
   } catch (error) {
@@ -65,7 +50,8 @@ async function convertAudio(media_url, callback_url, callback_method) {
   creditsUsed: 5,
   remainingCredits: 5304,
   id: 'nvigah9p99x0zkn2ul1k83qq',
-  permalink: 'https://shdw-drive.genesysgo.net/GYSM8Nk9kw7rYz5NbRht8Mh9K3KKRKJ86sThxVzyF4n1/nvigah9p99x0zkn2ul1k83qq.webm'
-  }
+  videolink: '',
+  audiolink: ''
+  }:
   */
 })();
