@@ -35,9 +35,7 @@ async function convertMediaURL(media_url) {
 (async () => {
   const media_url = process.argv[2];
   try {
-    const response = await convertMediaURL(
-      media_url,
-    );
+    const response = await convertMediaURL(media_url);
     console.log(response);
   } catch (error) {
     console.error(error);

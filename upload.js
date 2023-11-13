@@ -8,7 +8,7 @@ dotenv.config();
 async function uploadFile(fileStream, filename) {
   let formData = new FormData();
   let apikey = process.env.apikey;
-  let base_url = process.env.base_url || "https://sdrive.app/api/v3";
+  let base_url = process.env.base_url || "https://v3.sdrive.app";
   if (!apikey) {
     console.log("Please add your credentials to the .env file");
     process.exit();
@@ -20,6 +20,7 @@ async function uploadFile(fileStream, filename) {
     contentType: mimetype,
   });
   formData.append("apikey", apikey);
+  formData.append("network", "shdwdrive");
 
   return await axios
     .post(base_url + "/upload", formData, {

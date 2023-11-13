@@ -9,7 +9,7 @@ async function uploadVideo(
   fileStream,
   filename,
   callback_url,
-  callback_method
+  callback_method,
 ) {
   if (!callback_url) {
     console.log("Please provide callback url");
@@ -17,7 +17,7 @@ async function uploadVideo(
   }
   let formData = new FormData();
   let apikey = process.env.apikey;
-  let base_url = process.env.base_url || "https://sdrive.app/api/v3";
+  let base_url = process.env.base_url || "https://v3.sdrive.app";
   let mimetype = mime.lookup(path.extname(filename));
   formData.append("fileupload", fileStream, {
     filename: filename,
@@ -55,7 +55,7 @@ async function uploadVideo(
       fileStream,
       inputPath,
       callback_url,
-      "POST"
+      "POST",
     );
     console.log(response);
   } catch (error) {

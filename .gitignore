@@ -1,3 +1,10 @@
+# Temporarily disabled routes
+translate.js
+sentiment.js
+search.js
+upload-private.js
+generate-images.js
+
 # Logs
 .DS_Store
 logs

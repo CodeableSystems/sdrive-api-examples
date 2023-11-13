@@ -37,7 +37,7 @@ async function summarize(text, length) {
     console.log(
       `${response.summary.length} characters (${
         response.summary.split(" ").length
-      } words)`
+      } words)`,
     );
   } catch (error) {
     console.error(error);
